@@ -1,4 +1,5 @@
 eclipse/*
 .settings/*
+tmp/*
 .classpath
 .project
