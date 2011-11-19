@@ -1,4 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
+<script type="text/javascript">
+	// Create a socket
+	var socket = new WebSocket('@@{WebSocket.listen}');
+</script>
+<script src="@{'/public/javascripts/chat.coffee'}"
+	type="text/javascript"></script>
 
-#{welcome /}
+<div id="socketout"></div>
+<div id="text">
+	<form id="form">
+		<input id="box" type="text" /><input type="submit" value="Send" />
+	</form>
+</div>
