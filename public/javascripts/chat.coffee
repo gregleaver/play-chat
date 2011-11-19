@@ -8,21 +8,29 @@ addMessage = (data,s) ->
 
   if s
     result = '<div class="self">' +
-      '<span class="text">' + data.text + '</span>' +
-      '<span class="name">' + data.name + '<span>' +
+      '<div class="text">' + data.text + '</div>' +
+      '<div class="person">' +
+      '<img class="avatar" src="'+ gravatar(data.email) + '"/>' +
+      '<span class="name">' + data.name + '</span>' +
+      '</div>' +
       '<span class="time">' + currentDate() + '</span>' +
       '</div>'
   else
     result = '<div class="other">' +
       '<span class="time">' + currentDate() + '</span>' +
-      '<span class="name">' + data.name + '<span>' +
-      '<span class="text">' + data.text + '</span>' +
+      '<div class="person">' +
+      '<img class="avatar" src="'+ gravatar(data.email) + '"/>' +
+      '<span class="name">' + data.name + '</span>' +
+      '</div>' +
+      '<div class="text">' + data.text + '</div>' +
       '</div>'
   $('#socketout').append(result)
 
 
 $(document).ready(()->
   name = prompt('Enter your name:')
+  email = prompt('Enter your email:')
+  $('#avatar').attr('src',gravatar(email))
 
   socket.onmessage = (event) -> 
     data = readData(event)
@@ -32,7 +40,7 @@ $(document).ready(()->
   $('#form').submit(() ->
     text = $('#box').val()
     log('Sending: '+text)
-    data = {name: name, text: text}
+    data = {name: name, email: email, text: text}
     addMessage(data,true)
     writeData(data)
     $('#box').val('')
