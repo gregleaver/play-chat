@@ -2,29 +2,31 @@ readData = (event) -> JSON.parse(event.data)
 writeData = (data) -> socket.send(JSON.stringify(data))
 log = (t) -> console.log(t)
 currentDate = () -> (new Date()).toLocaleTimeString()
+scrollTo = (element) -> $(window).scrollTop(element.position().top)
 
 
 addMessage = (data,s) ->
 
   if s
     result = '<div class="self">' +
+      '<span class="time">' + currentDate() + '</span>' +
       '<div class="text">' + data.text + '</div>' +
       '<div class="person">' +
       '<img class="avatar" src="'+ gravatar(data.email) + '"/>' +
       '<span class="name">' + data.name + '</span>' +
       '</div>' +
-      '<span class="time">' + currentDate() + '</span>' +
       '</div>'
   else
     result = '<div class="other">' +
-      '<span class="time">' + currentDate() + '</span>' +
       '<div class="person">' +
       '<img class="avatar" src="'+ gravatar(data.email) + '"/>' +
       '<span class="name">' + data.name + '</span>' +
       '</div>' +
       '<div class="text">' + data.text + '</div>' +
+      '<span class="time">' + currentDate() + '</span>' +
       '</div>'
   $('#socketout').append(result)
+  scrollTo($('#text'))
 
 
 $(document).ready(()->
