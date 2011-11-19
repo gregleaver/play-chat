@@ -3,3 +3,4 @@ eclipse/*
 tmp/*
 .classpath
 .project
+test-result/*
