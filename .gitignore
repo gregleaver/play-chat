@@ -5,3 +5,7 @@ tmp/*
 .project
 test-result/*
 *.swp
+
+server.pid
+
+logs/system.out
